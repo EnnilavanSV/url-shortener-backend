@@ -14,7 +14,7 @@ app.use(cors());
 
 dotenv.config();
 
-const PORT = 5000; //defining the port for the server
+const PORT = process.env.PORT || 5000; //defining the port for the server
 
 connectDB();
 
