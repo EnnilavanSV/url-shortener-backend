@@ -4,8 +4,6 @@ import url from "../models/url.js";
 
 const router = express.Router();
 
-// We mount this whole file to '/api', so the route just needs to be '/shorten'
-// Full URL will become: POST /api/shorten
 router.post("/shorten", async (req, res) => {
   try {
     const { originalUrl, customCode } = req.body;
@@ -16,7 +14,7 @@ router.post("/shorten", async (req, res) => {
 
     let shortCode;
 
-    // 3. Check if the user requested a specific custom code
+    //  Check if the user requested a specific custom code
     if (customCode) {
       // Search the database to see if someone else is already using this code
       const existingUrl = await url.findOne({ shortCode: customCode });
@@ -31,7 +29,7 @@ router.post("/shorten", async (req, res) => {
       // If it's available, assign it!
       shortCode = customCode;
     } else {
-      // 4. If no custom code was provided, generate a random 6-character string
+      //  If no custom code was provided, generate a random 6-character string
       shortCode = crypto.randomBytes(3).toString("hex");
     }
 
